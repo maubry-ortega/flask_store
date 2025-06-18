@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Productos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-md">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-blue-600">Gestión de Productos</h1>
+      <button data-modal-target="crearModal" data-modal-toggle="crearModal"
+        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+        Crear Producto
+      </button>
+    </div>
+
+    <!-- Tabla -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="py-2 px-3 text-left">Código</th>
+            <th class="py-2 px-3 text-left">Nombre</th>
+            <th class="py-2 px-3 text-left">Precio</th>
+            <th class="py-2 px-3 text-left">Foto</th>
+            <th class="py-2 px-3 text-left">Categoría</th>
+            <th class="py-2 px-3 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="productosTabla" class="divide-y divide-gray-200"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Crear -->
+  <div id="crearModal" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow p-6 w-full max-w-lg">
+      <h2 class="text-xl font-bold mb-4">Crear Producto</h2>
+      <form id="formCrear" class="grid grid-cols-1 gap-4">
+        <input id="crearCodigo" type="text" placeholder="Código" required class="input-tw">
+        <input id="crearNombre" type="text" placeholder="Nombre" required class="input-tw">
+        <input id="crearPrecio" type="number" placeholder="Precio" required class="input-tw">
+        <input id="crearFoto" type="text" placeholder="URL de Foto" required class="input-tw">
+        <input id="crearCategoria" type="text" placeholder="Categoría" required class="input-tw">
+        <div class="flex justify-end gap-2">
+          <button data-modal-hide="crearModal" type="button" class="px-4 py-2 bg-gray-300 rounded">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Editar -->
+  <div id="editarModal" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow p-6 w-full max-w-lg">
+      <h2 class="text-xl font-bold mb-4">Editar Producto</h2>
+      <form id="formEditar" class="grid grid-cols-1 gap-4">
+        <input id="editarCodigo" type="text" disabled class="input-tw bg-gray-100">
+        <input id="editarNombre" type="text" required class="input-tw">
+        <input id="editarPrecio" type="number" required class="input-tw">
+        <input id="editarFoto" type="text" required class="input-tw">
+        <input id="editarCategoria" type="text" required class="input-tw">
+        <div class="flex justify-end gap-2">
+          <button data-modal-hide="editarModal" type="button" class="px-4 py-2 bg-gray-300 rounded">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Actualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
