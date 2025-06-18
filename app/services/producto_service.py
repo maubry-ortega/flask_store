@@ -1,19 +1,21 @@
-from app.cliente_mongo import db
-from bson.objectid import ObjectId
+from app.models.producto import collection_producto
 
-productos_col = db["productos"]
+class ProductoServicio:
+    def __init__(self, repository):
+        self.repository = repository
+        
+    def agregar_producto(self, data):
+        return self.repository.create(data)
 
-def agregar_producto(data):
-    return productos_col.insert_one(data)
+    def obtener_producto_por_id(self, producto_id):
+        producto = self.repository.get_by_id(producto_id)
+        return collection_producto(producto) if producto else None
 
-def obtener_producto_por_codigo(codigo):
-    return productos_col.find_one({"codigo": codigo})
+    def listar_productos(self):
+        return [collection_producto(p) for p in self.resitory.get_all()]
+    
+    def actualizar_producto(self, producto_id, data):
+        self.repository.update(producto_id, data)
 
-def listar_productos():
-    return list(productos_col.find())
-
-def actualizar_producto(codigo, data):
-    return productos_col.update_one({"codigo": codigo}, {"$set": data})
-
-def eliminar_producto(codigo):
-    return productos_col.delete_one({"codigo": codigo})
+    def eliminar_producto(self, producto_id):
+        return self.repository.delete(producto_id)
