@@ -1,12 +1,18 @@
-from flask import Flask, render_template
-from .routes.productos import productos_bp
+from flask import Flask
+from app.routes.productos import productos_bp
+from app.config import Config
+from pymongo import MongoClient
+
 
 def create_app():
     app = Flask(__name__)
-    app.register_blueprint(productos_bp, url_prefix="/productos")
-    
-    @app.route("/")
-    def index():
-        return render_template("index.html")
-    
-    return app 
+    app.config.from_object(Config)
+
+    # Init Mongo
+    client = MongoClient(app.config["MONGO_URI"])
+    app.db = client[app.config["MONGO_DB_NAME"]]
+
+    # Register Blueprints
+    app.register_blueprint(productos_bp, url_prefix="/")
+
+    return app

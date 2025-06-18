@@ -12,7 +12,7 @@ class ProductoServicio:
         return collection_producto(producto) if producto else None
 
     def listar_productos(self):
-        return [collection_producto(p) for p in self.resitory.get_all()]
+        return [collection_producto(p) for p in self.repository.get_all()]
     
     def actualizar_producto(self, producto_id, data):
         self.repository.update(producto_id, data)

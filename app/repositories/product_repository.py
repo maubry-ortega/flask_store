@@ -2,7 +2,7 @@ from bson.objectid import ObjectId
 
 class ProductoRepository:
     def __init__(self, db):
-        self.collection = db.products
+        self.collection = db.productos
         
     def get_all(self):
         return list(self.collection.find())
@@ -11,8 +11,9 @@ class ProductoRepository:
         return self.collection.find_one({"_id": ObjectId(producto_id)})
     
     def create(self, data):
-        result = self.collection.inserted_one(data)
+        result = self.collection.insert_one(data)
         return str(result.inserted_id)
+
     
     def update(self, producto_id, data):
         self.collection.update_one({"_id": ObjectId(producto_id)}, {"$set": data})

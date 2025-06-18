@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block contenido %}
+<h1 class="text-2xl font-bold mb-4">Lista de Productos</h1>
+<a href="{{ url_for('productos.crear_producto_formulario') }}" class="bg-green-600 text-white px-4 py-2 rounded">Agregar Producto</a>
+
+<table class="table-auto w-full mt-4 bg-white rounded shadow">
+    <thead>
+        <tr>
+            <th class="px-4 py-2">Código</th>
+            <th class="px-4 py-2">Nombre</th>
+            <th class="px-4 py-2">Precio</th>
+            <th class="px-4 py-2">Foto</th>
+            <th class="px-4 py-2">Categoría</th>
+            <th class="px-4 py-2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in productos %}
+        <tr class="border-t">
+            <td class="px-4 py-2">{{ p.codigo }}</td>
+            <td class="px-4 py-2">{{ p.nombre }}</td>
+            <td class="px-4 py-2">${{ p.precio }}</td>
+            <td class="px-4 py-2"><img src="{{ p.foto }}" class="w-16"></td>
+            <td class="px-4 py-2">{{ p.categoria }}</td>
+            <td class="px-4 py-2">
+                <a href="{{ url_for('productos.editar_producto_formulario', producto_id=p.id) }}" class="text-blue-600">Editar</a> |
+                <form action="{{ url_for('productos.eliminar_producto', producto_id=p.id) }}" method="post" style="display:inline;">
+                    <button type="submit" class="text-red-600">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
