@@ -1,3 +1,4 @@
+# VolleyDevByMaubry [3/∞] "Desde el núcleo, se forja la estructura de un mundo digital."
 from flask import Flask
 from app.routes.productos import productos_bp
 from app.config import Config

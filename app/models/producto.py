@@ -1,3 +1,4 @@
+# VolleyDevByMaubry [4/∞] "Cada producto es un relato, modelado en código para brillar."
 def collection_producto(doc):
     return {
         "id": str(doc["_id"]),
