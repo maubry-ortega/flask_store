@@ -9,8 +9,11 @@ class ProductoRepository:
         return list(self.collection.find())
     
     def get_by_id(self, producto_id):
-        return self.collection.find_one({"_id": ObjectId(producto_id)})
-    
+        try:
+            return self.collection.find_one({"_id": ObjectId(producto_id)})
+        except Exception:
+            return None
+
     def create(self, data):
         result = self.collection.insert_one(data)
         return str(result.inserted_id)

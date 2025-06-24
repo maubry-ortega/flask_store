@@ -1,19 +1,18 @@
 # VolleyDevByMaubry [3/∞] "Desde el núcleo, se forja la estructura de un mundo digital."
 from flask import Flask
-from app.routes.productos import productos_bp
 from app.config import Config
-from pymongo import MongoClient
+from app.extensions import init_mongo
+from app.routes import register_blueprints
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Init Mongo
-    client = MongoClient(app.config["MONGO_URI"])
-    app.db = client[app.config["MONGO_DB_NAME"]]
+    # Inicializar extensiones como la DB
+    init_mongo(app)
 
-    # Register Blueprints
-    app.register_blueprint(productos_bp, url_prefix="/")
+    # Registrar Blueprints
+    register_blueprints(app)
 
     return app
