@@ -12,7 +12,7 @@ productos_bp = Blueprint("productos", __name__)
 CARGAR_CARPETA = "app/static/img"
 EXTENCIONES_PERMITIDAS = {".jpg", ".jpeg", ".png", ".webp"}
 
-def guardar_imagen(archivo):
+def guardar_imagen(archivo): 
     if not archivo or archivo.filename == "":
         return ""
     
