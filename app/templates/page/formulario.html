@@ -1,38 +1,43 @@
 {% extends 'index.html' %}
-<!-- # VolleyDevByMaubry [9/∞] "Un formulario es la voz del usuario, capturada en líneas de diseño." -->
+<!-- # VolleyDevByMaubry [9/∞] "Cada campo, una puerta al catálogo digital." -->
 {% block contenido %}
-<h1 class="text-2xl font-bold mb-4">
-    {{ 'Editar Producto' if producto else 'Crear Producto' }}
+<h1 class="text-3xl font-bold mb-6 text-cyan-300">
+  {{ 'Editar Producto' if producto else 'Crear Producto' }}
 </h1>
 
-<form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow space-y-4">
-    <div>
-        <label>Código:</label>
-        <input type="text" name="codigo" value="{{ producto.codigo if producto else '' }}" class="w-full border px-2 py-1">
-    </div>
-    <div>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" value="{{ producto.nombre if producto else '' }}" class="w-full border px-2 py-1">
-    </div>
-    <div>
-        <label>Precio:</label>
-        <input type="number" step="0.01" name="precio" value="{{ producto.precio if producto else '' }}" class="w-full border px-2 py-1">
-    </div>
-    <div>
-        <label>Categoría:</label>
-        <input type="text" name="categoria" value="{{ producto.categoria if producto else '' }}" class="w-full border px-2 py-1">
-    </div>
-    <div>
-        <label>Imagen:</label>
-        <input type="file" name="archivo_imagen" class="w-full border px-2 py-1">
-        {% if producto and producto.foto %}
-            <img src="{{ producto.foto }}" class="w-24 mt-2">
-        {% endif %}
-    </div>
-    <div>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-            {{ 'Actualizar' if producto else 'Crear' }}
-        </button>
-    </div>
+<form method="POST" enctype="multipart/form-data" class="bg-slate-800 p-6 rounded-lg shadow-md space-y-6">
+  <div>
+    <label class="block text-sm mb-1">Código:</label>
+    <input type="text" name="codigo" value="{{ producto.codigo if producto else '' }}"
+           class="w-full bg-slate-900 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+  </div>
+  <div>
+    <label class="block text-sm mb-1">Nombre:</label>
+    <input type="text" name="nombre" value="{{ producto.nombre if producto else '' }}"
+           class="w-full bg-slate-900 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+  </div>
+  <div>
+    <label class="block text-sm mb-1">Precio:</label>
+    <input type="number" step="0.01" name="precio" value="{{ producto.precio if producto else '' }}"
+           class="w-full bg-slate-900 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+  </div>
+  <div>
+    <label class="block text-sm mb-1">Categoría:</label>
+    <input type="text" name="categoria" value="{{ producto.categoria if producto else '' }}"
+           class="w-full bg-slate-900 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+  </div>
+  <div>
+    <label class="block text-sm mb-1">Imagen:</label>
+    <input type="file" name="foto"
+           class="w-full bg-slate-900 text-white border border-slate-600 rounded px-3 py-2">
+    {% if producto and producto.foto %}
+      <img src="{{ producto.foto }}" class="w-24 mt-2 rounded shadow">
+    {% endif %}
+  </div>
+  <div>
+    <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2 rounded shadow-md">
+      {{ 'Actualizar' if producto else 'Crear' }}
+    </button>
+  </div>
 </form>
 {% endblock %}
